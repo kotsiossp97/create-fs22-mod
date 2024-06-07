@@ -17,4 +17,30 @@ npx create-fs22-mod <FS22_modName>
 
 You need to have NodeJS installed on your system, see the [Official Page](https://nodejs.org/en) to download it.
 
+## Manual Installation
+- Clone the repo
+```bash
+git clone https://github.com/kotsiossp97/create-fs22-mod
+```
+```bash
+cd create-fs22-mod
+```
+- Install Dependencies
+```bash
+npm ci
+```
 
+- Build the project
+```bash
+npm run build
+```
+
+- Install the package globally
+```bash
+npm install -g .
+```
+
+- Use the command as normally
+```bash
+npx create-fs22-mod <FS22_modName>
+```
