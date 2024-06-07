@@ -34,7 +34,7 @@ jobs:
       - run: npm run build
       - id: zipBuild
         name: Zip build artifacts
-        run: zip -r release.zip ./build/*
+        run: cd build; zip -r ../release.zip *; cd ..
       - name: Upload release Zip
         uses: actions/upload-release-asset@v1
         env:
