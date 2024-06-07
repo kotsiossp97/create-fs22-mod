@@ -8,6 +8,12 @@
 
 This is a CLI tool that creates a skeleton for a Farming Simulator mod project. The project includes a build command for automating the zipping of the mod to use it in the game.
 
+## Features
+
+- Scaffold your FS22 mod project into seconds
+- The provided template is bundled with some useful commands for making the developing of the mod easier.
+  Refer to the available commands in the template [Readme File](src/templates/mod_template/README.md#commands)
+
 ## Usage
 
 - Navigate to your preferred directory
@@ -24,6 +30,8 @@ npx create-fs22-mod <FS22_modName>
 You need to have NodeJS installed on your system, see the [Official Page](https://nodejs.org/en) to download it.
 
 ## Manual Installation
+
+In case that the package is not available from the [npm registry](https://www.npmjs.com/package/create-fs22-mod), use the following method to install it:
 
 - Clone the repo
 
@@ -58,3 +66,9 @@ npm install -g .
 ```bash
 npx create-fs22-mod <FS22_modName>
 ```
+
+## Future Features
+
+- [ ] Add additional templates for various mod types, e.g Vehicle/Implement, Script, Placeable etc.
+- [ ] Add more commands to the templates for making more tasks easier.
+- [ ] Add formatter plugin to templates (prettier) to make xml and lua files formatting consistent.
