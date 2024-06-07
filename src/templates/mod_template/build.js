@@ -28,10 +28,10 @@ const build = () => {
 
   addFolderContentsToZip(modFolder);
 
-  console.log("Deflating...");
+  console.log("Storing...");
 
   zip
-    .generateAsync({ type: "nodebuffer", compression: "DEFLATE" })
+    .generateAsync({ type: "nodebuffer", compression: "STORE" })
     .then((contents) => {
       fs.writeFileSync(path.join(__dirname, outDir, zipfile), contents);
     });
