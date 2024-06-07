@@ -19,7 +19,7 @@ jobs:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          draft: true
+          draft: false
   build:
     runs-on: ubuntu-latest
     needs: release
@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: build/release.zip
+          asset_path: ./release.zip
           asset_name: release.zip
           asset_content_type: application/gzip
   publish-to-npm:
