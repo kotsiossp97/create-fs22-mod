@@ -17,6 +17,8 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
       - name: Delete a Release
         uses: liudonghua123/delete-release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_name: v${{ steps.get-version.outputs.current-version }}
       - id: create_release
