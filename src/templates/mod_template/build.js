@@ -31,11 +31,11 @@ const build = () => {
   console.log("Storing...");
 
   zip
-    .generateAsync({ type: "nodebuffer", compression: "STORE" })
+    .generateAsync({ type: "nodebuffer", compression: "DEFLATE" })
     .then((contents) => {
       fs.writeFileSync(path.join(__dirname, outDir, zipfile), contents);
+      console.log("Done.");
     });
-  console.log("Done.");
 };
 
 const addFolderContentsToZip = (folderPath) => {
@@ -56,7 +56,7 @@ const addFile = (filepath) => {
     });
   } else {
     console.log("  Adding file", filepath);
-    zip.file(filepath, fs.readFileSync(filepath, "binary"));
+    zip.file(filepath, fs.readFileSync(filepath));
   }
 };
 
