@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"]
+    },
+    "moduleResolution": "Node",
+    "outDir": "build",
+    "importsNotUsedAsValues": "remove",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "skipLibCheck": true,
+    "ignoreDeprecations": "5.0"
+  },
+  "lib": ["es2015"],
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts"],
+  "ts-node": {
+    "esm": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "fs22_mod_template",
+  "version": "1.0.0",
+  "description": "A sample mod for FS22",
+  "scripts": {
+    "build": "rimraf build && node build.js build"
+  },
+  "author": "Konstantinos Andreou",
+  "license": "ISC",
+  "dependencies": {
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.7"
+  }
+}
