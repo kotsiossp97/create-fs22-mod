@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "A sample mod for FS22",
   "scripts": {
-    "build": "rimraf build && node build.js build"
+    "build": "node scripts/build.js build",
+    "backup": "node scripts/build.js build backup",
+    "fs:move": "node scripts/moveToMods.js",
+    "clear": "rimraf build"
   },
   "author": "Konstantinos Andreou",
   "license": "ISC",
   "dependencies": {
+    "figlet": "^1.7.0",
     "jszip": "^3.10.1"
   },
   "devDependencies": {
