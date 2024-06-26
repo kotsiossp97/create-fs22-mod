@@ -12,6 +12,7 @@ const main = async () => {
   console.log(figlet.textSync("CYSG"));
   checkOs();
   const { default: open } = await import("open");
+  console.log(`ℹ️\tLaunching Farming Simulator 22...\n`);
   const command = "steam://rungameid/1248130";
 
   open(command);
