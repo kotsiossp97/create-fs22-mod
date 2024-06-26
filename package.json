@@ -1,7 +1,7 @@
 {
   "name": "create-fs22-mod",
   "description": "Create a FS22 mod based on a template",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Konstantinos Andreou",
   "keywords": [
     "cli",
