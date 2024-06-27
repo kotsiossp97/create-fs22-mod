@@ -2,6 +2,8 @@ import chalk from "chalk";
 import validate from "validate-npm-package-name";
 import figlet from "figlet";
 import packageJson from "../../package.json";
+import { Templates, TTemplates } from "./constants";
+import select from "@inquirer/select";
 
 export const Utils = {
   getProjectDetails: () => {
@@ -51,6 +53,35 @@ export const Utils = {
       console.error(chalk.red("\nPlease choose a different project name."));
       process.exit(1);
     }
+  },
+  checkTemplate: async (template?: string): Promise<TTemplates> => {
+    if (template && Object.keys(Templates).includes(template)) {
+      return template as TTemplates;
+    }
+
+    let isValid = false;
+    let testTemplate = "";
+
+    while (!isValid) {
+      testTemplate = await select({
+        message: "\tSelect a mod template",
+        choices: Object.keys(Templates).map((t) => ({
+          name: t,
+          value: t,
+        })),
+        default: "general",
+      });
+
+      if (!testTemplate || !Object.keys(Templates).includes(testTemplate)) {
+        isValid = false;
+        Utils.printErrorMsg(
+          `This template ${chalk.bgRed.cyanBright(template)} does not exist. Please select a valid entry.`
+        );
+      } else {
+        isValid = true;
+      }
+    }
+    return testTemplate as TTemplates;
   },
 
   printErrorMsg: (message: string = "") => {

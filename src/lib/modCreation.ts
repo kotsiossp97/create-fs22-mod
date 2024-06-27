@@ -1,11 +1,16 @@
 import chalk from "chalk";
 import path from "path";
-import Constants from "./constants";
+import { Constants, Templates, TTemplates } from "./constants";
 import { copySync, rmSync } from "fs-extra";
 import { spawn } from "child_process";
 import { Utils } from "./utils";
 import { renameSync } from "fs";
-export const createMod = async (root: string, appName: string) => {
+
+export const createMod = async (
+  root: string,
+  appName: string,
+  modTemplate: TTemplates
+) => {
   console.log();
   console.log(
     `➡️\tCreating new FS22 Mod ${chalk.cyanBright(
@@ -14,16 +19,27 @@ export const createMod = async (root: string, appName: string) => {
   );
   console.log();
 
+  const templateFolder = Templates[modTemplate];
+
   const templateDir = path.join(
     __dirname,
     "..",
     Constants.TEMPLATES_FOLDER,
-    Constants.MOD_TEMPL_FOLDER
+    templateFolder
   );
 
   copySync(templateDir, root);
 
-  renameSync("fs22_sample_mod", appName);
+  const commonDir = path.join(
+    __dirname,
+    "..",
+    Constants.TEMPLATES_FOLDER,
+    Constants.COMMON_TEMPL_FOLDER
+  );
+  // cpSync(``, `${}`);
+  copySync(commonDir, root);
+
+  renameSync("FS22_sample_mod", appName);
 
   console.log();
   console.log(
