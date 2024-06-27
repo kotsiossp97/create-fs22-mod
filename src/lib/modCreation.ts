@@ -15,7 +15,7 @@ export const createMod = async (
   console.log(
     `➡️\tCreating new FS22 Mod ${chalk.cyanBright(
       appName
-    )} in ${chalk.green(root)}.`
+    )} with template ${chalk.blueBright(modTemplate)} in ${chalk.green(root)}.`
   );
   console.log();
 
