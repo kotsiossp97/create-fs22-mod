@@ -1,8 +1,9 @@
 {
   "name": "create-fs22-mod",
   "description": "Create a FS22 mod based on a template",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Konstantinos Andreou",
+  "type": "module",
   "keywords": [
     "cli",
     "fs22",
@@ -24,12 +25,12 @@
     "@prettier/plugin-xml": "^3.4.1",
     "@types/figlet": "^1.5.8",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.14.2",
-    "@types/validate-npm-package-name": "^4.0.2",
-    "prettier": "3.3.1",
+    "@types/node": "^20.14.9",
+    "@types/update-notifier": "^6.0.8",
+    "prettier": "^3.3.2",
     "rimraf": "^5.0.7",
-    "tsx": "^4.13.0",
-    "typescript": "^5.4.5"
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2"
   },
   "dependencies": {
     "@inquirer/prompts": "^5.0.5",
@@ -37,6 +38,6 @@
     "commander": "^12.1.0",
     "figlet": "^1.7.0",
     "fs-extra": "^11.2.0",
-    "validate-npm-package-name": "^5.0.1"
+    "update-notifier": "^7.0.0"
   }
 }

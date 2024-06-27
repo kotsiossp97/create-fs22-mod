@@ -71,4 +71,4 @@ npx create-fs22-mod <FS22_modName>
 
 - [ ] Add additional templates for various mod types, e.g Vehicle/Implement, Script, Placeable etc.
 - [ ] Add more commands to the templates for making more tasks easier.
-- [ ] Add formatter plugin to templates (prettier) to make xml and lua files formatting consistent.
+- [x] ~Add formatter plugin to templates (prettier) to make xml and lua files formatting consistent.~ Done

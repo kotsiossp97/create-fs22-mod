@@ -24,7 +24,7 @@
 
   <l10n filenamePrefix="languages/l10n" />
 
-  <storeItems>
-    <storeItem xmlFilename="" />
-  </storeItems>
+  <extraSourceFiles>
+    <sourceFile filename="scripts/index.lua" />
+  </extraSourceFiles>
 </modDesc>

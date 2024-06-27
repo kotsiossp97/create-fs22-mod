@@ -1,14 +1,30 @@
-import { Utils } from "./utils";
-import commander from "commander";
+import { Utils } from "./utils.js";
+import { createMod } from "./modCreation.js";
+import { Templates, TTemplates } from "./constants.js";
+
+import * as commander from "commander";
 import chalk from "chalk";
 import path from "path";
-import { existsSync, rmSync, ensureDirSync } from "fs-extra";
+import pkg from "fs-extra";
+const { existsSync, rmSync, ensureDirSync } = pkg;
 import { input } from "@inquirer/prompts";
-import { createMod } from "./modCreation";
+import updateNotifier from "update-notifier";
+
 let projectName: string;
 
 const init = async () => {
-  const details = Utils.getProjectDetails();
+  const packageJson = await Utils.getPackageJSON();
+  const notifier = updateNotifier({
+    pkg: packageJson,
+    shouldNotifyInNpmScript: true,
+    updateCheckInterval: 0,
+  });
+
+  notifier.notify({
+    isGlobal: true,
+  });
+
+  const details = await Utils.getProjectDetails();
   const program = new commander.Command(details.name)
     .version(details.version)
     .description(details.description)
@@ -17,13 +33,16 @@ const init = async () => {
     .action((name) => {
       projectName = name;
     })
-    // .addOption(
-    //   new commander.Option(
-    //     "-t --template <template>",
-    //     "template to be used"
-    //   ).choices(availableTemplates)
-    // )
+    .addOption(
+      new commander.Option(
+        "-t --template <template>",
+        "template to be used"
+      ).choices(Object.keys(Templates))
+    )
     .parse(process.argv);
+
+  const options = program.opts();
+  const template = options.template;
 
   Utils.printIntro();
 
@@ -32,9 +51,10 @@ const init = async () => {
   const appName = path.basename(root);
 
   Utils.checkAppName(appName);
+  const modTemplate = await Utils.checkTemplate(template);
 
   try {
-    await createFs22Mod(root, appName);
+    await createFs22Mod(root, appName, modTemplate);
   } catch (e) {
     process.chdir(currentDir);
     rmSync(`./${appName}`, { recursive: true, force: true });
@@ -45,7 +65,11 @@ const init = async () => {
 };
 export default init;
 
-const createFs22Mod = async (root: string, appName: string) => {
+const createFs22Mod = async (
+  root: string,
+  appName: string,
+  modTemplate: TTemplates
+) => {
   if (existsSync(root)) {
     Utils.printErrorMsg(
       `A project with the name ${chalk.bgRed.cyanBright(appName)} already exists.`
@@ -53,7 +77,7 @@ const createFs22Mod = async (root: string, appName: string) => {
 
     appName = await input({
       message: "\tEnter a new FS22 mod name",
-      default: "fs22_sample_mod",
+      default: "FS22_sample_mod",
     });
     root = path.join(root, "..", appName);
 
@@ -69,7 +93,7 @@ const createFs22Mod = async (root: string, appName: string) => {
   process.chdir(root);
 
   try {
-    await createMod(root, appName);
+    await createMod(root, appName, modTemplate);
   } catch (e) {
     throw e;
   }

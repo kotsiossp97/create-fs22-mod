@@ -5,16 +5,24 @@
   "scripts": {
     "build": "node scripts/build.js build",
     "backup": "node scripts/build.js build backup",
+    "clear": "rimraf build",
     "fs:move": "node scripts/moveToMods.js",
-    "clear": "rimraf build"
+    "fs:moveFiles": "node scripts/moveFilesToMods.js",
+    "fs:run": "node scripts/launch.js",
+    "fs:test": "npm run fs:move && npm run fs:run",
+    "fs:testFiles": "npm run fs:moveFiles && npm run fs:run",
+    "format": "prettier --write 'FS22_*/**/*.{xml,json}'"
   },
   "author": "Konstantinos Andreou",
   "license": "ISC",
   "dependencies": {
+    "archiver": "^7.0.1",
     "figlet": "^1.7.0",
-    "jszip": "^3.10.1"
+    "open": "^10.1.0"
   },
   "devDependencies": {
+    "@prettier/plugin-xml": "^3.4.1",
+    "prettier": "^3.3.2",
     "rimraf": "^5.0.7"
   }
 }

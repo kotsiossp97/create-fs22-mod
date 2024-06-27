@@ -1,10 +1,19 @@
 import chalk from "chalk";
-import validate from "validate-npm-package-name";
 import figlet from "figlet";
-import packageJson from "../../package.json";
+import { readFileSync } from "fs";
+import { Templates, TTemplates } from "./constants.js";
+import select from "@inquirer/select";
 
 export const Utils = {
-  getProjectDetails: () => {
+  getPackageJSON: () => {
+    const file = readFileSync(
+      new URL("../../package.json", import.meta.url),
+      "utf-8"
+    );
+    return JSON.parse(file);
+  },
+  getProjectDetails: async () => {
+    const packageJson = await Utils.getPackageJSON();
     return {
       name: packageJson.name,
       version: packageJson.version,
@@ -20,26 +29,6 @@ export const Utils = {
     console.log();
   },
   checkAppName: (appName: string) => {
-    // const validationResult = validate(appName);
-
-    // if (!validationResult.validForNewPackages) {
-    //   console.error(
-    //     chalk.red(
-    //       `❌\tCannot create a project named ${chalk.green(
-    //         `"${appName}"`
-    //       )} because of npm naming restrictions:\n`
-    //     )
-    //   );
-    //   [
-    //     ...(validationResult.errors || []),
-    //     ...(validationResult.warnings || []),
-    //   ].forEach((error) => {
-    //     console.error(chalk.red(`  * ${error}`));
-    //   });
-    //   console.error(chalk.red("\nPlease choose a different project name."));
-    //   process.exit(1);
-    // }
-
     if (!appName.startsWith("FS22_")) {
       console.error(
         chalk.red(
@@ -51,6 +40,35 @@ export const Utils = {
       console.error(chalk.red("\nPlease choose a different project name."));
       process.exit(1);
     }
+  },
+  checkTemplate: async (template?: string): Promise<TTemplates> => {
+    if (template && Object.keys(Templates).includes(template)) {
+      return template as TTemplates;
+    }
+
+    let isValid = false;
+    let testTemplate = "";
+
+    while (!isValid) {
+      testTemplate = await select({
+        message: "\tSelect a mod template",
+        choices: Object.keys(Templates).map((t) => ({
+          name: t,
+          value: t,
+        })),
+        default: "general",
+      });
+
+      if (!testTemplate || !Object.keys(Templates).includes(testTemplate)) {
+        isValid = false;
+        Utils.printErrorMsg(
+          `This template ${chalk.bgRed.cyanBright(template)} does not exist. Please select a valid entry.`
+        );
+      } else {
+        isValid = true;
+      }
+    }
+    return testTemplate as TTemplates;
   },
 
   printErrorMsg: (message: string = "") => {
