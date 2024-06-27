@@ -1,6 +1,5 @@
 export const Constants = {
   TEMPLATES_FOLDER: "templates",
-  MOD_TEMPL_FOLDER: "mod_template",
   COMMON_TEMPL_FOLDER: "common",
 };
 

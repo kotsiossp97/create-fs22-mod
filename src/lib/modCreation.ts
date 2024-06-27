@@ -36,7 +36,7 @@ export const createMod = async (
     Constants.TEMPLATES_FOLDER,
     Constants.COMMON_TEMPL_FOLDER
   );
-  // cpSync(``, `${}`);
+
   copySync(commonDir, root);
 
   renameSync("FS22_sample_mod", appName);

@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import validate from "validate-npm-package-name";
 import figlet from "figlet";
 import packageJson from "../../package.json";
 import { Templates, TTemplates } from "./constants";
@@ -22,26 +21,6 @@ export const Utils = {
     console.log();
   },
   checkAppName: (appName: string) => {
-    // const validationResult = validate(appName);
-
-    // if (!validationResult.validForNewPackages) {
-    //   console.error(
-    //     chalk.red(
-    //       `❌\tCannot create a project named ${chalk.green(
-    //         `"${appName}"`
-    //       )} because of npm naming restrictions:\n`
-    //     )
-    //   );
-    //   [
-    //     ...(validationResult.errors || []),
-    //     ...(validationResult.warnings || []),
-    //   ].forEach((error) => {
-    //     console.error(chalk.red(`  * ${error}`));
-    //   });
-    //   console.error(chalk.red("\nPlease choose a different project name."));
-    //   process.exit(1);
-    // }
-
     if (!appName.startsWith("FS22_")) {
       console.error(
         chalk.red(
