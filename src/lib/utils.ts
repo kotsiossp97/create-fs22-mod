@@ -1,11 +1,19 @@
 import chalk from "chalk";
 import figlet from "figlet";
-import packageJson from "../../package.json";
-import { Templates, TTemplates } from "./constants";
+import { readFileSync } from "fs";
+import { Templates, TTemplates } from "./constants.js";
 import select from "@inquirer/select";
 
 export const Utils = {
-  getProjectDetails: () => {
+  getPackageJSON: () => {
+    const file = readFileSync(
+      new URL("../../package.json", import.meta.url),
+      "utf-8"
+    );
+    return JSON.parse(file);
+  },
+  getProjectDetails: async () => {
+    const packageJson = await Utils.getPackageJSON();
     return {
       name: packageJson.name,
       version: packageJson.version,

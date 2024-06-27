@@ -1,10 +1,16 @@
+import { Utils } from "./utils.js";
+import { Constants, Templates, TTemplates } from "./constants.js";
 import chalk from "chalk";
 import path from "path";
-import { Constants, Templates, TTemplates } from "./constants";
-import { copySync, rmSync } from "fs-extra";
+import { fileURLToPath } from "url";
+// import { copySync, rmSync } from "fs-extra";
+import pkg from "fs-extra";
+const { copySync, rmSync } = pkg;
 import { spawn } from "child_process";
-import { Utils } from "./utils";
 import { renameSync } from "fs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const createMod = async (
   root: string,

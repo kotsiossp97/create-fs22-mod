@@ -1,15 +1,30 @@
-import { Utils } from "./utils";
-import commander from "commander";
+import { Utils } from "./utils.js";
+import { createMod } from "./modCreation.js";
+import { Templates, TTemplates } from "./constants.js";
+
+import * as commander from "commander";
 import chalk from "chalk";
 import path from "path";
-import { existsSync, rmSync, ensureDirSync } from "fs-extra";
+import pkg from "fs-extra";
+const { existsSync, rmSync, ensureDirSync } = pkg;
 import { input } from "@inquirer/prompts";
-import { createMod } from "./modCreation";
-import { Templates, TTemplates } from "./constants";
+import updateNotifier from "update-notifier";
+
 let projectName: string;
 
 const init = async () => {
-  const details = Utils.getProjectDetails();
+  const packageJson = await Utils.getPackageJSON();
+  const notifier = updateNotifier({
+    pkg: packageJson,
+    shouldNotifyInNpmScript: true,
+    updateCheckInterval: 0,
+  });
+
+  notifier.notify({
+    isGlobal: true,
+  });
+
+  const details = await Utils.getProjectDetails();
   const program = new commander.Command(details.name)
     .version(details.version)
     .description(details.description)
